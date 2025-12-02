@@ -2,11 +2,23 @@ pipeline {
     agent any
 
     stages {
-        stage('Run Python') {
+        stage('Checkout') {
             steps {
-                echo "Running Python script..."
+                checkout scm
+            }
+        }
+
+        stage('Run Python Script') {
+            steps {
+                echo "Running Python script on Windows..."
                 bat 'python app.py'
             }
+        }
+    }
+
+    post {
+        always {
+            archiveArtifacts artifacts: 'app.py', allowEmptyArchive: true
         }
     }
 }
