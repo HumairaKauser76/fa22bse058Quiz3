@@ -1,19 +1,13 @@
 pipeline {
-  agent { docker { image 'openjdk:11' } }    
-  stages {
-    stage('Checkout') { steps { checkout scm } }
-    stage('Build') {
-      steps {
-        sh 'javac -d build src/Main.java'
-      }
+    agent any
+
+    stages {
+        stage('Build Java File') {
+            steps {
+                echo "Running Java file..."
+                sh 'javac Main.java'
+                sh 'java Main'
+            }
+        }
     }
-    stage('Run') {
-      steps {
-        sh 'java -cp build Main'
-      }
-    }
-  }
-  post {
-    always { archiveArtifacts artifacts: 'build/**/*.class', allowEmptyArchive: true }
-  }
 }
