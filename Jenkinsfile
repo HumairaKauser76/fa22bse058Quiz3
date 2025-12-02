@@ -1,19 +1,15 @@
+// Jenkinsfile (python-branch) — Docker agent (Python)
 pipeline {
-  agent { docker { image 'openjdk:11' } }    
+  agent { docker { image 'python:3.11' } }   // uses Docker image python:3.11
   stages {
     stage('Checkout') { steps { checkout scm } }
-    stage('Build') {
-      steps {
-        sh 'javac -d build src/Main.java'
-      }
-    }
     stage('Run') {
       steps {
-        sh 'java -cp build Main'
+        sh 'python app.py'
       }
     }
   }
   post {
-    always { archiveArtifacts artifacts: 'build/**/*.class', allowEmptyArchive: true }
+    always { archiveArtifacts artifacts: 'app.py', allowEmptyArchive: true }
   }
 }
