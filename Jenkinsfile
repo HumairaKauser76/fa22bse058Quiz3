@@ -1,6 +1,5 @@
-// Jenkinsfile (main branch) — Docker agent (OpenJDK)
 pipeline {
-  agent { docker { image 'openjdk:11' } }    // uses Docker image openjdk:11
+  agent { docker { image 'openjdk:11' } }    
   stages {
     stage('Checkout') { steps { checkout scm } }
     stage('Build') {
