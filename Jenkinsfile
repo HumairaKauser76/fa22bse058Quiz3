@@ -1,15 +1,12 @@
-
 pipeline {
-  agent { docker { image 'python:3.11' } }   
-  stages {
-    stage('Checkout') { steps { checkout scm } }
-    stage('Run') {
-      steps {
-        sh 'python app.py'
-      }
+    agent any
+
+    stages {
+        stage('Run Python') {
+            steps {
+                echo "Running Python script..."
+                bat 'python app.py'
+            }
+        }
     }
-  }
-  post {
-    always { archiveArtifacts artifacts: 'app.py', allowEmptyArchive: true }
-  }
 }
