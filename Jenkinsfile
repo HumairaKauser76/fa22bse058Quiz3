@@ -11,7 +11,8 @@ pipeline {
         stage('Run Python Script') {
             steps {
                 echo "Running Python script on Windows..."
-                bat 'python app.py'
+                // Use full path to python.exe
+                bat 'C:\\Users\\humai\\AppData\\Local\\Programs\\Python\\Python311\\python.exe app.py'
             }
         }
     }
